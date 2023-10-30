@@ -39,7 +39,7 @@ namespace PerformanceTests
             test.RunBaseline = (string.IsNullOrEmpty(input) || input.ToLower().StartsWith("y"));
         }
 
-        private static void ShowGraph((int, int, int) result)
+        private static void ShowGraph((int, int, int, int) result)
         {
             const int numStars = 50;
 
@@ -48,71 +48,20 @@ namespace PerformanceTests
             var barA = max > 0 ? result.Item1 * numStars / max : 0;
             var barB = max > 0 ? result.Item2 * numStars / max : 0;
             var barC = max > 0 ? result.Item3 * numStars / max : 0;
+            var barD = max > 0 ? result.Item4 * numStars / max : 0;
 
             // show bar graph
             Console.WriteLine($"A |{new string('\x25A0', barA)}");
             Console.WriteLine($"B |{new string('\x25A0', barB)}");
             Console.WriteLine($"C |{new string('\x25A0', barC)}");
+            Console.WriteLine($"D |{new string('\x25A0', barD)}");
             Console.WriteLine("  +--------------------------------------------------");
-            Console.WriteLine($"    A: {result.Item1}ms, B: {result.Item2}ms, C: {result.Item3}ms");
+            Console.WriteLine($"    A: {result.Item1}ms, B: {result.Item2}ms, C: {result.Item3}ms, D: {result.Item4}ms");
             Console.WriteLine();
         }
 
         private static void Main()
         {
-            /*
-            ExceptionTest obj = new ExceptionTest();
-            obj.RunBaseline = true;
-            obj.Iterations = 100000; // use this setting for best test results
-            Console.WriteLine(obj.Measure());
-            */
-
-            /*
-            StringTest obj = new StringTest();
-            obj.RunBaseline = true;
-            obj.Iterations = 200000; // use this setting for best test results
-            Console.WriteLine(obj.Measure());
-            */
-
-            /*
-            ArraysTest obj = new ();
-            obj.RunBaseline = true;
-            Console.WriteLine(obj.Measure());
-            */
-
-            /*
-            ForForeachTest obj = new();
-            obj.RunBaseline = true;
-            Console.WriteLine(obj.Measure());
-            */
-
-            /* 
-            StructsTest obj = new();
-            obj.RunBaseline = true;
-            Console.WriteLine(obj.Measure());
-            */
-
-            /*
-            MemoryTest obj = new();
-            obj.RunBaseline = true;
-            Console.WriteLine(obj.Measure());
-            */
-
-            /*
-            InstantiationTest obj = new();
-            obj.RunBaseline = true;
-            Console.WriteLine(obj.Measure());
-            */
-
-            /*
-            PropertiesTest obj = new();
-            obj.RunBaseline = true;
-            Console.WriteLine(obj.Measure());
-
-            Console.ReadKey();
-            */
-
-
             // initialize test list
             Tests.Add(new ExceptionTest());
             Tests.Add(new StringsTest());

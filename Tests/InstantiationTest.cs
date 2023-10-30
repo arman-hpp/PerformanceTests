@@ -51,7 +51,20 @@ namespace PerformanceTests.Tests
 			return true;
 		}
 
-		protected override bool MeasureTestB()
+        protected override bool MeasureTestB()
+        {
+            // instantiate StringBuilder using reflection
+            var type = typeof(System.Text.StringBuilder);
+            for (var i = 0; i < Iterations; i++)
+            {
+                var obj = Activator.CreateInstance(type);
+                if (obj != null && obj.GetType() != typeof(System.Text.StringBuilder))
+                    throw new InvalidOperationException("Constructed object is not a StringBuilder");
+            }
+            return true;
+        }
+
+        protected override bool MeasureTestC()
 		{
             // instantiate StringBuilder using dynamic CIL
             var constructor = GetConstructor("System.Text.StringBuilder");
@@ -64,7 +77,7 @@ namespace PerformanceTests.Tests
 			return true;
 		}
 
-		protected override bool MeasureTestC()
+		protected override bool MeasureTestD()
 		{
             // instantiate StringBuilder directly
             for (var i = 0; i < Iterations; i++)
