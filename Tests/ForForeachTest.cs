@@ -46,10 +46,5 @@ namespace PerformanceTests.Tests
 			}
 			return true;
 		}
-
-		protected override unsafe bool MeasureTestC()
-		{
-			return false;
-		}
-	}
+    }
 }

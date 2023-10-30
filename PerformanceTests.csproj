@@ -8,4 +8,10 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="PerformanceTests.sln.DotSettings" />
+  </ItemGroup>
+
 </Project>

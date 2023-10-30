@@ -2,22 +2,6 @@
 
 namespace PerformanceTests
 {
-    public class PerformanceResult
-    {
-        public int MillisecondsA { get; set; }
-        public int MillisecondsB { get; set; }
-        public int CollectionsA { get; set; }
-        public int CollectionsB { get; set; }
-
-        public PerformanceResult(int msA, int msB, int collA, int collB)
-        {
-            MillisecondsA = msA;
-            MillisecondsB = msB;
-            CollectionsA = collA;
-            CollectionsB = collB;
-        }
-    }
-
     public class PerformanceTest : IPerformanceTest
     {
         private const int DefaultRepetitions = 10;
@@ -45,6 +29,11 @@ namespace PerformanceTests
             return false;
         }
 
+        protected virtual bool MeasureTestD()
+        {
+            return false;
+        }
+
         public PerformanceTest(string name, string description, int interactions)
         {
             Name = name;
@@ -52,9 +41,9 @@ namespace PerformanceTests
             Iterations = interactions;
         }
 
-        public (int, int, int) Measure()
+        public (int, int, int, int) Measure()
         {
-            long totalA = 0, totalB = 0, totalC = 0;
+            long totalA = 0, totalB = 0, totalC = 0, totalD = 0;
 
             var stopwatch = new Stopwatch();
 
@@ -91,11 +80,22 @@ namespace PerformanceTests
                     totalC += stopwatch.ElapsedMilliseconds;
             }
 
+            // run optimized tests D
+            for (long i = 0; i < DefaultRepetitions; i++)
+            {
+                stopwatch.Restart();
+                var implemented = MeasureTestD();
+                stopwatch.Stop();
+                if (implemented)
+                    totalD += stopwatch.ElapsedMilliseconds;
+            }
+
             // return results
             return (
                 (int)(totalA / DefaultRepetitions),
                 (int)(totalB / DefaultRepetitions),
-                (int)(totalC / DefaultRepetitions));
+                (int)(totalC / DefaultRepetitions),
+                (int)(totalD / DefaultRepetitions));
         }
     }
 }

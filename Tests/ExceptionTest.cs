@@ -13,7 +13,7 @@ namespace PerformanceTests.Tests
 
 		// fields
 		private readonly char[] _digitArray = new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X' };
-		private readonly List<string> _numbers = new List<string>();
+		private readonly List<string> _numbers = new();
 
 		public ExceptionTest() : base("Exceptions", "A:Parse, B:TryParse", DefaultIterations)
 		{

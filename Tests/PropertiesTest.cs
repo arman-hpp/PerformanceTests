@@ -89,7 +89,7 @@ namespace PerformanceTests.Tests
 		protected override bool MeasureTestA()
 		{
 			// get property using reflection
-			var sb = new StringBuilder("Mark Duncan Farragher");
+			var sb = new StringBuilder("Arman Hasanpour Pazevari");
 			var pi = sb.GetType().GetProperty("Length");
             if (pi == null)
                 return false;
@@ -105,7 +105,7 @@ namespace PerformanceTests.Tests
 		protected override bool MeasureTestB()
 		{
 			// get property using dynamic cil
-			var sb = new StringBuilder("Mark Duncan Farragher");
+			var sb = new StringBuilder("Arman Hasanpour Pazevari");
 			var getter = GetPropertyGetter("System.Text.StringBuilder", "Length");
 			for (var i = 0; i < Iterations; i++)
 			{
@@ -119,7 +119,7 @@ namespace PerformanceTests.Tests
 		protected override bool MeasureTestC()
 		{
 			// get property using compiled code
-			var sb = new StringBuilder("Mark Duncan Farragher");
+			var sb = new StringBuilder("Arman Hasanpour Pazevari");
 			for (var i = 0; i < Iterations; i++)
 			{
 				var length = sb.Length;
